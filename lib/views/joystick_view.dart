@@ -57,6 +57,9 @@ class JoystickView extends StatelessWidget {
   /// Defaults to [true]
   final bool showArrows;
 
+  final bool forwardBackwardArrowsVis;
+  final bool upDownArrowsVis;
+
   JoystickView(
       {this.size,
       this.iconsColor = Colors.white54,
@@ -65,7 +68,9 @@ class JoystickView extends StatelessWidget {
       this.opacity,
       this.onDirectionChanged,
       this.interval,
-      this.showArrows = true});
+      this.showArrows = true,
+      this.forwardBackwardArrowsVis = true,
+      this.upDownArrowsVis = true});
 
   @override
   Widget build(BuildContext context) {
@@ -144,36 +149,47 @@ class JoystickView extends StatelessWidget {
   List<Widget> createArrows() {
     return [
       Positioned(
-        child: Icon(
-          Icons.arrow_upward,
-          color: iconsColor,
+        child: Visibility(
+          visible: upDownArrowsVis,
+          child: Icon(
+            Icons.arrow_upward,
+            color: iconsColor,
+          ),
         ),
         top: 16.0,
         left: 0.0,
         right: 0.0,
       ),
       Positioned(
-        child: Icon(
-          Icons.arrow_back,
-          color: iconsColor,
+        child: Visibility(
+          visible: forwardBackwardArrowsVis,
+          child: Icon(
+            Icons.arrow_back,
+            color: iconsColor,
+          ),
         ),
         top: 0.0,
         bottom: 0.0,
         left: 16.0,
       ),
       Positioned(
-        child: Icon(
-          Icons.arrow_forward,
-          color: iconsColor,
-        ),
-        top: 0.0,
-        bottom: 0.0,
-        right: 16.0,
-      ),
+          child: Visibility(
+            visible: forwardBackwardArrowsVis,
+            child: Icon(
+              Icons.arrow_forward,
+              color: iconsColor,
+            ),
+          ),
+          top: 0.0,
+          bottom: 0.0,
+          right: 16.0),
       Positioned(
-        child: Icon(
-          Icons.arrow_downward,
-          color: iconsColor,
+        child: Visibility(
+          visible: upDownArrowsVis,
+          child: Icon(
+            Icons.arrow_downward,
+            color: iconsColor,
+          ),
         ),
         bottom: 16.0,
         left: 0.0,
